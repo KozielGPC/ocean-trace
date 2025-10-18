@@ -20,7 +20,7 @@ export default function DashboardPage() {
     },
     {
       title: "Avg Ocean Trace",
-      value: analytics.avgOcean Trace,
+      value: analytics.avgOceanTraceScore,
       icon: TrendingUp,
       description: "Across all products",
       trend: "+3.2 points",
