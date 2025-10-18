@@ -9,6 +9,7 @@ import { calculateFishScore } from "@/lib/fish-score"
 import { ScoreBadge } from "@/components/score-badge"
 import { ScoreBreakdown } from "@/components/score-breakdown"
 import { SupplyChainTimeline } from "@/components/supply-chain-timeline"
+import { SupplyChainMap } from "@/components/supply-chain-map"
 import { TemperatureChart } from "@/components/temperature-chart"
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -123,9 +124,18 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <ScoreBreakdown fishScore={fishScore} />
         </div>
 
-        {/* Supply Chain & Temperature */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <SupplyChainTimeline product={product} />
+        {/* Supply Chain Map & Timeline */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-6">Supply Chain Journey</h2>
+          <div className="grid lg:grid-cols-2 gap-8 mb-8">
+            <SupplyChainMap product={product} />
+            <SupplyChainTimeline product={product} />
+          </div>
+        </div>
+
+        {/* Temperature Chart */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-6">Temperature History</h2>
           <TemperatureChart product={product} />
         </div>
 
