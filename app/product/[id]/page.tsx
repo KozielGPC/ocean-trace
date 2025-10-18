@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Share2, MapPin, Calendar, Anchor, Shield, Leaf } from "lucide-react"
+import { ArrowLeft, Share2, MapPin, Calendar, Anchor, Shield } from "lucide-react"
 import { mockProducts } from "@/lib/mock-data"
 import { calculateOceanTraceScore } from "@/lib/ocean-trace"
 import { ScoreBreakdown } from "@/components/score-breakdown"
@@ -223,11 +223,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        {/* Score Breakdown */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Score Breakdown</h2>
-          <ScoreBreakdown oceanTraceScore={oceanTraceScore} product={product} />
-        </div>
+        
 
         {/* Supply Chain Map & Timeline */}
         <div className="mb-8">
@@ -236,6 +232,12 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <SupplyChainMap product={product} />
             <SupplyChainTimeline product={product} />
           </div>
+        </div>
+
+        {/* Score Breakdown */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">Score Breakdown</h2>
+          <ScoreBreakdown oceanTraceScore={oceanTraceScore} product={product} />
         </div>
 
 
