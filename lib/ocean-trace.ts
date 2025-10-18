@@ -6,7 +6,7 @@ export function calculateOceanTraceScore(product: Product): OceanTraceScore {
   const health = calculateHealth(product)
   const priceValue = calculatePriceValue(product)
 
-  const overall = Math.round(freshness * 0.35 + sustainability * 0.3 + health * 0.2 + priceValue * 0.15)
+  const overall = Math.round(freshness * 0.4 + sustainability * 0.35 + health * 0.25)
 
   return {
     overall,

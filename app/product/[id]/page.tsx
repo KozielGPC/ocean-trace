@@ -12,7 +12,6 @@ import { SupplyChainTimeline } from "@/components/supply-chain-timeline"
 import { SupplyChainMap } from "@/components/supply-chain-map"
 import { BlockchainVerification } from "@/components/blockchain-verification"
 import { AIAnalysis } from "@/components/ai-analysis"
-import { TemperatureChart } from "@/components/temperature-chart"
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -47,11 +46,38 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Batch ID - Top Right of Page Content */}
+        <div className="flex justify-end mb-6">
+          <div className="flex items-center gap-2 text-sm">
+            <Shield className="h-4 w-4 text-muted-foreground" />
+            <span className="font-medium text-muted-foreground">Batch ID:</span>
+            <Badge variant="outline" className="font-mono text-xs">
+              {product.qrCode}
+            </Badge>
+          </div>
+        </div>
+
         {/* Product Header with Image on Right */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           <div>
             <h1 className="text-4xl font-bold mb-2 text-balance">{product.name}</h1>
-            <p className="text-lg text-muted-foreground mb-6">{product.species}</p>
+            <p className="text-lg text-muted-foreground mb-4">{product.species}</p>
+            
+            {/* Ocean Trace Score - Simple colored label */}
+            <div className="flex items-center gap-2 mb-6">
+              <span className="text-sm font-medium text-muted-foreground">Ocean Trace Score:</span>
+              <Badge 
+                variant="secondary" 
+                className={`text-sm ${
+                  oceanTraceScore.overall >= 90 ? 'bg-green-100 text-green-800' :
+                  oceanTraceScore.overall >= 75 ? 'bg-blue-100 text-blue-800' :
+                  oceanTraceScore.overall >= 60 ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-red-100 text-red-800'
+                }`}
+              >
+                {oceanTraceScore.overall}/100
+              </Badge>
+            </div>
             
             <div className="flex gap-2 flex-wrap mb-6">
               {product.isMSCCertified && <Badge variant="secondary">MSC Certified</Badge>}
@@ -110,14 +136,49 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           
           {/* Right side cards - stacked vertically */}
           <div className="min-h-[600px] flex flex-col gap-6">
-            {/* Ocean Trace Score Card */}
+            {/* Nutrition Information */}
             <Card className="flex-1 min-h-0">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-lg mb-4">Ocean Trace Score</CardTitle>
-                <div className="flex justify-center">
-                  <ScoreBadge score={oceanTraceScore.overall} size="lg" />
-                </div>
+              <CardHeader>
+                <CardTitle className="text-lg">Nutrition Information</CardTitle>
               </CardHeader>
+              <CardContent className="h-full">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span className="font-medium text-muted-foreground">Omega-3 Content:</span>
+                      <div className="font-semibold">{product.omega3Content}mg per 100g</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Mercury Level:</span>
+                      <div className="font-semibold">{product.mercuryLevel}</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Protein Content:</span>
+                      <div className="font-semibold">High</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Fat Content:</span>
+                      <div className="font-semibold">Low</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Vitamin D:</span>
+                      <div className="font-semibold">Excellent Source</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Selenium:</span>
+                      <div className="font-semibold">High</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">B12 Vitamin:</span>
+                      <div className="font-semibold">Excellent Source</div>
+                    </div>
+                    <div>
+                      <span className="font-medium text-muted-foreground">Health Rating:</span>
+                      <div className="font-semibold">{oceanTraceScore.health}/100</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
 
             {/* CO2 Footprint Card */}
@@ -196,30 +257,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <BlockchainVerification product={product} />
         </div>
 
-        {/* Temperature Chart */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">Temperature History</h2>
-          <TemperatureChart product={product} />
-        </div>
 
-        {/* Additional Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Why Choose This Product?</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="prose prose-sm max-w-none">
-              <p className="text-muted-foreground leading-relaxed">
-                This {product.name.toLowerCase()} has been carefully tracked from ocean to your plate. With a Ocean Trace
-                of {oceanTraceScore.overall}/100, it represents a{" "}
-                {oceanTraceScore.overall >= 90 ? "excellent" : oceanTraceScore.overall >= 75 ? "good" : "fair"} choice for consumers
-                who care about freshness, sustainability, and health. The product has maintained optimal temperature
-                throughout its journey and comes from {product.quotaCompliant ? "quota-compliant" : ""} fishing
-                operations.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
       </main>
     </div>
   )

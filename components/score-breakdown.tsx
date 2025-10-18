@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Leaf, Thermometer, Heart, DollarSign } from "lucide-react"
+import { Leaf, Thermometer, Heart } from "lucide-react"
 import type { OceanTraceScore } from "@/lib/types"
 
 interface ScoreBreakdownProps {
@@ -32,14 +32,6 @@ export function ScoreBreakdown({ oceanTraceScore }: ScoreBreakdownProps) {
       color: "text-coral-600",
       bgColor: "bg-coral-100",
       factors: oceanTraceScore.breakdown.healthFactors,
-    },
-    {
-      name: "Price Value",
-      score: oceanTraceScore.priceValue,
-      icon: DollarSign,
-      color: "text-amber-600",
-      bgColor: "bg-amber-100",
-      factors: oceanTraceScore.breakdown.priceFactors,
     },
   ]
 

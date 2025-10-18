@@ -11,7 +11,6 @@ import {
   Thermometer,
   Leaf,
   Heart,
-  DollarSign,
   Shield
 } from 'lucide-react'
 import type { Product, OceanTraceScore } from '@/lib/types'
@@ -30,7 +29,6 @@ interface AnalysisResult {
     freshness: string
     sustainability: string
     health: string
-    value: string
     blockchain: string
   }
   finalVerdict: string
@@ -64,7 +62,6 @@ export function AIAnalysis({ product, oceanTraceScore }: AIAnalysisProps) {
     if (score.freshness >= 85) strengths.push('Exceptional freshness maintained through optimal cold chain')
     if (score.sustainability >= 85) strengths.push('Excellent sustainability practices and certifications')
     if (score.health >= 85) strengths.push('Outstanding nutritional profile and health benefits')
-    if (score.priceValue >= 85) strengths.push('Excellent value for money')
     if (product.isMSCCertified) strengths.push('MSC Certified for sustainable fishing practices')
     if (product.isBlockchainVerified) strengths.push('Fully verified blockchain traceability record')
     
@@ -83,7 +80,6 @@ export function AIAnalysis({ product, oceanTraceScore }: AIAnalysisProps) {
     if (score.freshness < 70) concerns.push('Freshness concerns due to extended time from catch')
     if (score.sustainability < 70) concerns.push('Sustainability practices could be improved')
     if (score.health < 70) concerns.push('Health profile shows some concerns')
-    if (score.priceValue < 70) concerns.push('Price may not reflect optimal value')
     
     const daysOld = Math.floor((Date.now() - new Date(product.caughtDate).getTime()) / (1000 * 60 * 60 * 24))
     if (daysOld > 5) concerns.push('Product is approaching freshness limits')
@@ -119,11 +115,6 @@ export function AIAnalysis({ product, oceanTraceScore }: AIAnalysisProps) {
         ? `Good health profile (${score.health}/100). ${product.mercuryLevel} mercury levels with ${product.omega3Content}mg omega-3 per 100g. Solid nutritional benefits.`
         : `Fair health profile (${score.health}/100). ${product.mercuryLevel} mercury levels with ${product.omega3Content}mg omega-3 per 100g. Limited nutritional advantages.`,
       
-      value: score.priceValue >= 85
-        ? `Excellent value (${score.priceValue}/100). At $${product.price.toFixed(2)} for ${product.weight}lb ($${(product.price/product.weight).toFixed(2)}/lb), this offers exceptional value compared to market rates.`
-        : score.priceValue >= 70
-        ? `Good value (${score.priceValue}/100). At $${product.price.toFixed(2)} for ${product.weight}lb ($${(product.price/product.weight).toFixed(2)}/lb), this offers competitive pricing.`
-        : `Fair value (${score.priceValue}/100). At $${product.price.toFixed(2)} for ${product.weight}lb ($${(product.price/product.weight).toFixed(2)}/lb), pricing is above market average.`,
       
       blockchain: product.isBlockchainVerified
         ? `Complete blockchain verification. All ${product.blockchainHashes.length} supply chain records are cryptographically verified and immutable. Full transparency from ocean to plate.`
@@ -273,13 +264,6 @@ export function AIAnalysis({ product, oceanTraceScore }: AIAnalysisProps) {
                   <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.health}</p>
                 </div>
 
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <DollarSign className="h-4 w-4 text-green-600" />
-                    <span className="font-medium text-sm">Value Analysis</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.value}</p>
-                </div>
 
                 <div className="p-3 bg-muted/50 rounded-lg">
                   <div className="flex items-center gap-2 mb-1">
