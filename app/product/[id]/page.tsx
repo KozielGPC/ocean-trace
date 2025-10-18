@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Share2, MapPin, Calendar, Anchor, Shield } from "lucide-react"
+import { ArrowLeft, Share2, MapPin, Calendar, Anchor, Shield, Leaf } from "lucide-react"
 import { mockProducts } from "@/lib/mock-data"
 import { calculateOceanTraceScore } from "@/lib/ocean-trace"
 import { ScoreBadge } from "@/components/score-badge"
@@ -11,6 +11,7 @@ import { ScoreBreakdown } from "@/components/score-breakdown"
 import { SupplyChainTimeline } from "@/components/supply-chain-timeline"
 import { SupplyChainMap } from "@/components/supply-chain-map"
 import { BlockchainVerification } from "@/components/blockchain-verification"
+import { AIAnalysis } from "@/components/ai-analysis"
 import { TemperatureChart } from "@/components/temperature-chart"
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -46,17 +47,13 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Product Header */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
+        {/* Product Header with Image on Right */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
           <div>
-            <div className="aspect-video rounded-xl overflow-hidden bg-card mb-4">
-              <img
-                src={product.image || "/placeholder.svg"}
-                alt={product.name}
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="flex gap-2 flex-wrap">
+            <h1 className="text-4xl font-bold mb-2 text-balance">{product.name}</h1>
+            <p className="text-lg text-muted-foreground mb-6">{product.species}</p>
+            
+            <div className="flex gap-2 flex-wrap mb-6">
               {product.isMSCCertified && <Badge variant="secondary">MSC Certified</Badge>}
               {product.quotaCompliant && <Badge variant="secondary">Quota Compliant</Badge>}
               {product.isBlockchainVerified && (
@@ -66,37 +63,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 </Badge>
               )}
               <Badge variant="outline">{product.fishingMethod}</Badge>
-            </div>
-          </div>
-
-          <div>
-            <h1 className="text-4xl font-bold mb-2 text-balance">{product.name}</h1>
-            <p className="text-lg text-muted-foreground mb-6">{product.species}</p>
-
-            <div className="flex items-center justify-center mb-6 py-6 bg-card rounded-xl">
-              <ScoreBadge score={oceanTraceScore.overall} size="lg" />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Price</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">${product.price.toFixed(2)}</div>
-                  <div className="text-sm text-muted-foreground">${(product.price / product.weight).toFixed(2)}/lb</div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Carbon Footprint</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{product.carbonFootprint}kg</div>
-                  <div className="text-sm text-muted-foreground">CO2 equivalent</div>
-                </CardContent>
-              </Card>
             </div>
 
             <div className="space-y-3 text-sm">
@@ -123,11 +89,95 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               </div>
             </div>
           </div>
+
+          <div>
+            <div className="aspect-video rounded-xl overflow-hidden bg-card">
+              <img
+                src={product.image || "/placeholder.svg"}
+                alt={product.name}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Left Side Cards: Score & AI Analysis */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          {/* AI Analysis - Left side */}
+          <div className="min-h-[600px]">
+            <AIAnalysis product={product} oceanTraceScore={oceanTraceScore} />
+          </div>
+          
+          {/* Right side cards - stacked vertically */}
+          <div className="min-h-[600px] flex flex-col gap-6">
+            {/* Ocean Trace Score Card */}
+            <Card className="flex-1 min-h-0">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-lg mb-4">Ocean Trace Score</CardTitle>
+                <div className="flex justify-center">
+                  <ScoreBadge score={oceanTraceScore.overall} size="lg" />
+                </div>
+              </CardHeader>
+            </Card>
+
+            {/* CO2 Footprint Card */}
+            <Card className="flex-1 min-h-0">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Leaf className="h-5 w-5 text-green-600" />
+                  Environmental Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-center h-full">
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-2xl font-bold text-green-600">{product.carbonFootprint}kg</div>
+                    <div className="text-sm text-muted-foreground">CO2 equivalent</div>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Carbon footprint from catch to retail
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Sustainability Rating Card */}
+            <Card className="flex-1 min-h-0">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-blue-600" />
+                  Sustainability
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-center h-full">
+                <div className="space-y-4">
+                  <div>
+                    <Badge 
+                      variant="secondary" 
+                      className={`text-lg px-4 py-2 ${
+                        product.sustainabilityRating === 'excellent' ? 'bg-green-100 text-green-800' :
+                        product.sustainabilityRating === 'good' ? 'bg-blue-100 text-blue-800' :
+                        product.sustainabilityRating === 'fair' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}
+                    >
+                      {product.sustainabilityRating.charAt(0).toUpperCase() + product.sustainabilityRating.slice(1)}
+                    </Badge>
+                  </div>
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <div>Method: {product.fishingMethod}</div>
+                    {product.isMSCCertified && <div className="text-green-600">✓ MSC Certified</div>}
+                    {product.quotaCompliant && <div className="text-green-600">✓ Quota Compliant</div>}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Score Breakdown */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Ocean Trace Breakdown</h2>
+          <h2 className="text-2xl font-bold mb-4">Score Breakdown</h2>
           <ScoreBreakdown oceanTraceScore={oceanTraceScore} />
         </div>
 
