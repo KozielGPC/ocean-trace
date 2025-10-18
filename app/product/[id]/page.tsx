@@ -140,119 +140,93 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        {/* Left Side Cards: Score & AI Analysis */}
+        {/* Left Side Cards: AI Analysis and Nutrition */}
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {/* AI Analysis - Left side */}
-          <div className="min-h-[600px]">
+          <div>
             <AIAnalysis product={product} oceanTraceScore={oceanTraceScore} />
           </div>
           
-          {/* Right side cards - stacked vertically */}
-          <div className="min-h-[600px] flex flex-col gap-6">
+          {/* Right side - Stacked Nutrition and Additional Info */}
+          <div className="space-y-6">
             {/* Nutrition Information */}
-            <Card className="flex-1 min-h-0">
-              <CardHeader>
+            <Card>
+              <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Nutrition Information</CardTitle>
               </CardHeader>
-              <CardContent className="h-full">
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="font-medium text-muted-foreground">Omega-3 Content:</span>
-                      <div className="font-semibold">{product.omega3Content}mg per 100g</div>
+              <CardContent className="pt-0">
+                <div className="space-y-3">
+                  {/* Key Nutritional Highlights */}
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="text-center p-2 bg-green-50 rounded-lg">
+                      <div className="text-lg font-bold text-green-600">{product.omega3Content}mg</div>
+                      <div className="text-xs text-green-700">Omega-3</div>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Mercury Level:</span>
-                      <div className="font-semibold">{product.mercuryLevel}</div>
+                    <div className="text-center p-2 bg-blue-50 rounded-lg">
+                      <Badge 
+                        variant="secondary" 
+                        className={`text-xs ${
+                          product.mercuryLevel === 'low' ? 'bg-green-100 text-green-800' :
+                          product.mercuryLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {product.mercuryLevel}
+                      </Badge>
+                      <div className="text-xs text-blue-700 mt-1">Mercury</div>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Protein Content:</span>
-                      <div className="font-semibold">High</div>
+                    <div className="text-center p-2 bg-purple-50 rounded-lg">
+                      <div className="text-lg font-bold text-purple-600">{oceanTraceScore.health}</div>
+                      <div className="text-xs text-purple-700">Health Score</div>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Fat Content:</span>
-                      <div className="font-semibold">Low</div>
+                  </div>
+
+                  {/* Detailed Nutrition Grid */}
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">Protein:</span>
+                      <span className="font-medium">High</span>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Vitamin D:</span>
-                      <div className="font-semibold">Excellent Source</div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">Fat:</span>
+                      <span className="font-medium">Low</span>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Selenium:</span>
-                      <div className="font-semibold">High</div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">Vitamin D:</span>
+                      <span className="font-medium">Excellent</span>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">B12 Vitamin:</span>
-                      <div className="font-semibold">Excellent Source</div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">Selenium:</span>
+                      <span className="font-medium">High</span>
                     </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Health Rating:</span>
-                      <div className="font-semibold">{oceanTraceScore.health}/100</div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">B12:</span>
+                      <span className="font-medium">Excellent</span>
+                    </div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-muted-foreground">Iron:</span>
+                      <span className="font-medium">Good</span>
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* CO2 Footprint Card */}
-            <Card className="flex-1 min-h-0">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Leaf className="h-5 w-5 text-green-600" />
-                  Environmental Impact
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center h-full">
-                <div className="space-y-4">
-                  <div>
-                    <div className="text-2xl font-bold text-green-600">{product.carbonFootprint}kg</div>
-                    <div className="text-sm text-muted-foreground">CO2 equivalent</div>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Carbon footprint from catch to retail
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Sustainability Rating Card */}
-            <Card className="flex-1 min-h-0">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-blue-600" />
-                  Sustainability
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center h-full">
-                <div className="space-y-4">
-                  <div>
-                    <Badge 
-                      variant="secondary" 
-                      className={`text-lg px-4 py-2 ${
-                        product.sustainabilityRating === 'excellent' ? 'bg-green-100 text-green-800' :
-                        product.sustainabilityRating === 'good' ? 'bg-blue-100 text-blue-800' :
-                        product.sustainabilityRating === 'fair' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-red-100 text-red-800'
-                      }`}
-                    >
-                      {product.sustainabilityRating.charAt(0).toUpperCase() + product.sustainabilityRating.slice(1)}
-                    </Badge>
-                  </div>
-                  <div className="text-sm text-muted-foreground space-y-1">
-                    <div>Method: {product.fishingMethod}</div>
-                    {product.isMSCCertified && <div className="text-green-600">✓ MSC Certified</div>}
-                    {product.quotaCompliant && <div className="text-green-600">✓ Quota Compliant</div>}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {/* Blockchain Verification */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Shield className="h-5 w-5 text-blue-600" />
+                Blockchain Verification
+              </h3>
+              <BlockchainVerification product={product} />
+            </div>
           </div>
         </div>
 
         {/* Score Breakdown */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Score Breakdown</h2>
-          <ScoreBreakdown oceanTraceScore={oceanTraceScore} />
+          <ScoreBreakdown oceanTraceScore={oceanTraceScore} product={product} />
         </div>
 
         {/* Supply Chain Map & Timeline */}
@@ -264,11 +238,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        {/* Blockchain Verification */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">Blockchain Verification</h2>
-          <BlockchainVerification product={product} />
-        </div>
 
 
       </main>
