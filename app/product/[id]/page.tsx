@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Share2, MapPin, Calendar, Anchor, Shield, Leaf } from "lucide-react"
 import { mockProducts } from "@/lib/mock-data"
 import { calculateOceanTraceScore } from "@/lib/ocean-trace"
-import { ScoreBadge } from "@/components/score-badge"
 import { ScoreBreakdown } from "@/components/score-breakdown"
 import { SupplyChainTimeline } from "@/components/supply-chain-timeline"
 import { SupplyChainMap } from "@/components/supply-chain-map"
@@ -81,13 +80,27 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             
             <div className="flex gap-2 flex-wrap mb-6">
               {product.isMSCCertified && <Badge variant="secondary">MSC Certified</Badge>}
-              {product.quotaCompliant && <Badge variant="secondary">Quota Compliant</Badge>}
+              {product.quotaCompliant && <Badge variant="secondary">Stock Compliant</Badge>}
               {product.isBlockchainVerified && (
                 <Badge variant="secondary" className="bg-blue-100 text-blue-800">
                   <Shield className="h-3 w-3 mr-1" />
                   Blockchain Verified
                 </Badge>
               )}
+              <Badge 
+                variant="secondary" 
+                className={`${
+                  oceanTraceScore.freshness >= 90 ? 'bg-green-100 text-green-800' :
+                  oceanTraceScore.freshness >= 75 ? 'bg-blue-100 text-blue-800' :
+                  oceanTraceScore.freshness >= 60 ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-red-100 text-red-800'
+                }`}
+              >
+                {oceanTraceScore.freshness >= 90 ? 'Peak Freshness' :
+                 oceanTraceScore.freshness >= 75 ? 'Very Fresh' :
+                 oceanTraceScore.freshness >= 60 ? 'Fresh' :
+                 'Fair Freshness'}
+              </Badge>
               <Badge variant="outline">{product.fishingMethod}</Badge>
             </div>
 
