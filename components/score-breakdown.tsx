@@ -47,6 +47,111 @@ export function ScoreBreakdown({ oceanTraceScore, product }: ScoreBreakdownProps
     <div className="space-y-8">
       {/* Main Score Categories */}
       <div className="grid md:grid-cols-3 gap-6">
+
+        {/* Enhanced Sustainability Card */}
+        <Card className="md:col-span-1">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                  <Leaf className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg">Sustainability</CardTitle>
+                  <p className="text-xs text-muted-foreground">{getScoreLabel(oceanTraceScore.sustainability)} Performance</p>
+                </div>
+              </div>
+              <div className="text-3xl font-bold text-green-600">{oceanTraceScore.sustainability}</div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* Progress Bar */}
+            <div className="relative">
+              <Progress value={oceanTraceScore.sustainability} className="h-3" />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>0</span>
+                <span>100</span>
+              </div>
+            </div>
+
+            {/* Key Metrics Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {/* Carbon Footprint */}
+              <div className="p-3 bg-green-50 rounded-lg text-center">
+                <div className="text-xl font-bold text-green-600 mb-1">{product.carbonFootprint}kg</div>
+                <div className="text-xs text-green-700">CO2 Footprint</div>
+              </div>
+              
+              {/* Sustainability Rating */}
+              <div className="p-3 bg-blue-50 rounded-lg text-center">
+                <Badge 
+                  variant="secondary" 
+                  className={`text-sm px-2 py-1 mb-1 ${
+                    product.sustainabilityRating === 'excellent' ? 'bg-green-100 text-green-800' :
+                    product.sustainabilityRating === 'good' ? 'bg-blue-100 text-blue-800' :
+                    product.sustainabilityRating === 'fair' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-red-100 text-red-800'
+                  }`}
+                >
+                  {product.sustainabilityRating.charAt(0).toUpperCase() + product.sustainabilityRating.slice(1)}
+                </Badge>
+                <div className="text-xs text-blue-700">Rating</div>
+              </div>
+            </div>
+
+            {/* Fishing Method Highlight */}
+            <div className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
+              <div className="flex items-center gap-2 mb-2">
+                <Ship className="h-4 w-4 text-green-600" />
+                <h4 className="font-semibold text-sm text-green-800">Fishing Method</h4>
+              </div>
+              <div className="text-sm font-medium text-green-700 mb-1">{product.fishingMethod}</div>
+              <div className="text-xs text-green-600">
+                {product.fishingMethod === 'Trawling' ? 'Bottom fishing with nets' :
+                 product.fishingMethod === 'Longline' ? 'Hook and line fishing' :
+                 product.fishingMethod === 'Pole and Line' ? 'Hand-operated fishing' :
+                 'Sustainable fishing technique'}
+              </div>
+            </div>
+
+            {/* Certifications & Key Factors */}
+            <div className="space-y-3">
+              {/* Certifications */}
+              <div className="p-3 bg-green-50 rounded-lg">
+                <h4 className="font-semibold text-sm mb-2 text-green-800">Certifications</h4>
+                <div className="flex flex-wrap gap-2">
+                  {product.isMSCCertified && (
+                    <Badge variant="outline" className="text-xs bg-green-100 text-green-800 border-green-300">
+                      ✓ MSC Certified
+                    </Badge>
+                  )}
+                  {product.quotaCompliant && (
+                    <Badge variant="outline" className="text-xs bg-green-100 text-green-800 border-green-300">
+                      ✓ Quota Compliant
+                    </Badge>
+                  )}
+                  <Badge variant="outline" className="text-xs bg-blue-100 text-blue-800 border-blue-300">
+                    ✓ Traceability Verified
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Key Factors */}
+              <div className={`p-3 rounded-lg border ${getScoreColor(oceanTraceScore.sustainability)}`}>
+                <h4 className="font-semibold text-sm mb-2">Key Factors</h4>
+                <ul className="space-y-1">
+                  {oceanTraceScore.breakdown.sustainabilityFactors.map((factor, idx) => (
+                    <li key={idx} className="text-xs flex items-start gap-2">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span>{factor}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
         {/* Enhanced Freshness Card */}
         <Card className="relative overflow-hidden">
           <CardHeader className="pb-3">
@@ -221,109 +326,7 @@ export function ScoreBreakdown({ oceanTraceScore, product }: ScoreBreakdownProps
           </CardContent>
         </Card>
 
-        {/* Enhanced Sustainability Card */}
-        <Card className="md:col-span-1">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                  <Leaf className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">Sustainability</CardTitle>
-                  <p className="text-xs text-muted-foreground">{getScoreLabel(oceanTraceScore.sustainability)} Performance</p>
-                </div>
-              </div>
-              <div className="text-3xl font-bold text-green-600">{oceanTraceScore.sustainability}</div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Progress Bar */}
-            <div className="relative">
-              <Progress value={oceanTraceScore.sustainability} className="h-3" />
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                <span>0</span>
-                <span>100</span>
-              </div>
-            </div>
-
-            {/* Key Metrics Grid */}
-            <div className="grid grid-cols-2 gap-3">
-              {/* Carbon Footprint */}
-              <div className="p-3 bg-green-50 rounded-lg text-center">
-                <div className="text-xl font-bold text-green-600 mb-1">{product.carbonFootprint}kg</div>
-                <div className="text-xs text-green-700">CO2 Footprint</div>
-              </div>
-              
-              {/* Sustainability Rating */}
-              <div className="p-3 bg-blue-50 rounded-lg text-center">
-                <Badge 
-                  variant="secondary" 
-                  className={`text-sm px-2 py-1 mb-1 ${
-                    product.sustainabilityRating === 'excellent' ? 'bg-green-100 text-green-800' :
-                    product.sustainabilityRating === 'good' ? 'bg-blue-100 text-blue-800' :
-                    product.sustainabilityRating === 'fair' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }`}
-                >
-                  {product.sustainabilityRating.charAt(0).toUpperCase() + product.sustainabilityRating.slice(1)}
-                </Badge>
-                <div className="text-xs text-blue-700">Rating</div>
-              </div>
-            </div>
-
-            {/* Fishing Method Highlight */}
-            <div className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
-              <div className="flex items-center gap-2 mb-2">
-                <Ship className="h-4 w-4 text-green-600" />
-                <h4 className="font-semibold text-sm text-green-800">Fishing Method</h4>
-              </div>
-              <div className="text-sm font-medium text-green-700 mb-1">{product.fishingMethod}</div>
-              <div className="text-xs text-green-600">
-                {product.fishingMethod === 'Trawling' ? 'Bottom fishing with nets' :
-                 product.fishingMethod === 'Longline' ? 'Hook and line fishing' :
-                 product.fishingMethod === 'Pole and Line' ? 'Hand-operated fishing' :
-                 'Sustainable fishing technique'}
-              </div>
-            </div>
-
-            {/* Certifications & Key Factors */}
-            <div className="space-y-3">
-              {/* Certifications */}
-              <div className="p-3 bg-green-50 rounded-lg">
-                <h4 className="font-semibold text-sm mb-2 text-green-800">Certifications</h4>
-                <div className="flex flex-wrap gap-2">
-                  {product.isMSCCertified && (
-                    <Badge variant="outline" className="text-xs bg-green-100 text-green-800 border-green-300">
-                      ✓ MSC Certified
-                    </Badge>
-                  )}
-                  {product.quotaCompliant && (
-                    <Badge variant="outline" className="text-xs bg-green-100 text-green-800 border-green-300">
-                      ✓ Quota Compliant
-                    </Badge>
-                  )}
-                  <Badge variant="outline" className="text-xs bg-blue-100 text-blue-800 border-blue-300">
-                    ✓ Traceability Verified
-                  </Badge>
-                </div>
-              </div>
-
-              {/* Key Factors */}
-              <div className={`p-3 rounded-lg border ${getScoreColor(oceanTraceScore.sustainability)}`}>
-                <h4 className="font-semibold text-sm mb-2">Key Factors</h4>
-                <ul className="space-y-1">
-                  {oceanTraceScore.breakdown.sustainabilityFactors.map((factor, idx) => (
-                    <li key={idx} className="text-xs flex items-start gap-2">
-                      <span className="text-primary mt-0.5">•</span>
-                      <span>{factor}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        
       </div>
     </div>
   )

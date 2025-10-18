@@ -233,45 +233,46 @@ export function AIAnalysis({ product, oceanTraceScore }: AIAnalysisProps) {
               </div>
             )}
 
-            {/* Detailed Analysis */}
+            {/* Key Insights */}
             <div>
               <h4 className="font-semibold mb-3 flex items-center gap-2">
                 <Brain className="h-4 w-4 text-blue-600" />
-                Detailed Analysis
+                Key Insights
               </h4>
-              <div className="space-y-4">
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Thermometer className="h-4 w-4 text-blue-600" />
-                    <span className="font-medium text-sm">Freshness Analysis</span>
+              <div className="space-y-3">
+                {analysisResult.keyStrengths.length > 0 && (
+                  <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <span className="font-medium text-sm text-green-800">Strengths</span>
+                    </div>
+                    <ul className="space-y-1">
+                      {analysisResult.keyStrengths.map((strength, idx) => (
+                        <li key={idx} className="text-sm text-green-700 flex items-start gap-2">
+                          <span className="text-green-600 mt-0.5">•</span>
+                          <span>{strength}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.freshness}</p>
-                </div>
-
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
-                    <span className="font-medium text-sm">Sustainability Analysis</span>
+                )}
+                
+                {analysisResult.keyConcerns.length > 0 && (
+                  <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                      <span className="font-medium text-sm text-yellow-800">Areas to Consider</span>
+                    </div>
+                    <ul className="space-y-1">
+                      {analysisResult.keyConcerns.map((concern, idx) => (
+                        <li key={idx} className="text-sm text-yellow-700 flex items-start gap-2">
+                          <span className="text-yellow-600 mt-0.5">•</span>
+                          <span>{concern}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.sustainability}</p>
-                </div>
-
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Heart className="h-4 w-4 text-red-600" />
-                    <span className="font-medium text-sm">Health Analysis</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.health}</p>
-                </div>
-
-
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Shield className="h-4 w-4 text-purple-600" />
-                    <span className="font-medium text-sm">Blockchain Verification</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{analysisResult.detailedAnalysis.blockchain}</p>
-                </div>
+                )}
               </div>
             </div>
 
