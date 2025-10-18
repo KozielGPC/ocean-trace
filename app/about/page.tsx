@@ -19,7 +19,7 @@ export default function AboutPage() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-balance">About FishScore</h1>
+          <h1 className="text-4xl font-bold mb-4 text-balance">About Ocean Trace</h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Bringing transparency and trust to seafood consumption through AI-powered traceability
           </p>
@@ -37,7 +37,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground leading-relaxed">
-              FishScore was created to address the critical lack of transparency in the seafood industry. With 35% of
+              Ocean Trace was created to address the critical lack of transparency in the seafood industry. With 35% of
               seafood wasted and 70% of consumers uncertain about their seafood choices, we believe technology can
               bridge this gap. Our AI-powered platform tracks seafood from ocean to plate, providing consumers with the
               information they need to make sustainable, healthy, and informed decisions.
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
         {/* How It Works */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">How FishScore Works</h2>
+          <h2 className="text-2xl font-bold mb-6">How Ocean Trace Works</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
@@ -69,7 +69,7 @@ export default function AboutPage() {
                       2
                     </div>
                     <div>
-                      <p className="font-medium">View the FishScore</p>
+                      <p className="font-medium">View the Ocean Trace</p>
                       <p className="text-sm text-muted-foreground">AI-powered rating from 0-100</p>
                     </div>
                   </li>
@@ -97,7 +97,7 @@ export default function AboutPage() {
                       1
                     </div>
                     <div>
-                      <p className="font-medium">Integrate FishScore</p>
+                      <p className="font-medium">Integrate Ocean Trace</p>
                       <p className="text-sm text-muted-foreground">Add QR codes to products</p>
                     </div>
                   </li>
@@ -161,7 +161,7 @@ export default function AboutPage() {
                 <CardTitle className="text-3xl font-bold">84</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Average FishScore across all products</p>
+                <p className="text-sm text-muted-foreground">Average Ocean Trace across all products</p>
               </CardContent>
             </Card>
           </div>

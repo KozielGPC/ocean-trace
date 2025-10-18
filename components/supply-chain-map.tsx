@@ -186,7 +186,7 @@ export function SupplyChainMap({ product }: SupplyChainMapProps) {
         {/* Timeline summary */}
         <div className="mt-4 space-y-2">
           <h4 className="font-medium text-sm">Journey Summary</h4>
-          <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
             <div>
               <span className="text-muted-foreground">Distance:</span>
               <span className="ml-1 font-medium">~2,847 km</span>

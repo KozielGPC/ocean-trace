@@ -33,6 +33,10 @@ export interface Product {
   // Supply chain data
   temperatureHistory: TemperatureReading[]
   carbonFootprint: number // kg CO2
+  
+  // Blockchain data
+  blockchainHashes: BlockchainRecord[]
+  isBlockchainVerified: boolean
 }
 
 export interface TemperatureReading {
@@ -41,7 +45,20 @@ export interface TemperatureReading {
   location: string
 }
 
-export interface FishScore {
+export interface BlockchainRecord {
+  id: string
+  stage: 'catch' | 'processing' | 'transport' | 'retail'
+  timestamp: string
+  hash: string
+  previousHash?: string
+  data: {
+    location: string
+    details: Record<string, any>
+  }
+  verified: boolean
+}
+
+export interface OceanTraceScore {
   overall: number // 0-100
   freshness: number
   sustainability: number
@@ -83,7 +100,7 @@ export interface RetailerAnalytics {
     fair: number
     poor: number
   }
-  avgFishScore: number
+  avgOceanTraceScore: number
   wasteReduction: number // percentage
   revenueImpact: number // dollars
 }

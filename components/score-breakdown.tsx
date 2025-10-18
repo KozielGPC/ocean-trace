@@ -1,45 +1,45 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Leaf, Thermometer, Heart, DollarSign } from "lucide-react"
-import type { FishScore } from "@/lib/types"
+import type { OceanTraceScore } from "@/lib/types"
 
 interface ScoreBreakdownProps {
-  fishScore: FishScore
+  oceanTraceScore: OceanTraceScore
 }
 
-export function ScoreBreakdown({ fishScore }: ScoreBreakdownProps) {
+export function ScoreBreakdown({ oceanTraceScore }: ScoreBreakdownProps) {
   const categories = [
     {
       name: "Freshness",
-      score: fishScore.freshness,
+      score: oceanTraceScore.freshness,
       icon: Thermometer,
       color: "text-ocean-600",
       bgColor: "bg-ocean-100",
-      factors: fishScore.breakdown.freshnessFactors,
+      factors: oceanTraceScore.breakdown.freshnessFactors,
     },
     {
       name: "Sustainability",
-      score: fishScore.sustainability,
+      score: oceanTraceScore.sustainability,
       icon: Leaf,
       color: "text-seaweed-600",
       bgColor: "bg-seaweed-100",
-      factors: fishScore.breakdown.sustainabilityFactors,
+      factors: oceanTraceScore.breakdown.sustainabilityFactors,
     },
     {
       name: "Health",
-      score: fishScore.health,
+      score: oceanTraceScore.health,
       icon: Heart,
       color: "text-coral-600",
       bgColor: "bg-coral-100",
-      factors: fishScore.breakdown.healthFactors,
+      factors: oceanTraceScore.breakdown.healthFactors,
     },
     {
       name: "Price Value",
-      score: fishScore.priceValue,
+      score: oceanTraceScore.priceValue,
       icon: DollarSign,
       color: "text-amber-600",
       bgColor: "bg-amber-100",
-      factors: fishScore.breakdown.priceFactors,
+      factors: oceanTraceScore.breakdown.priceFactors,
     },
   ]
 

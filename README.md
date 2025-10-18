@@ -1,14 +1,14 @@
-# FishScore - AI-Powered Seafood Traceability
+# Ocean Trace - AI-Powered Seafood Traceability
 
 ## Overview
 
-FishScore is an intelligent traceability platform that tracks seafood from ocean to plate, providing consumers with transparency about freshness, sustainability, and health impact. Built for the Ocean Traceability Hackathon 2025.
+Ocean Trace is an intelligent traceability platform that tracks seafood from ocean to plate, providing consumers with transparency about freshness, sustainability, and health impact. Built for the Ocean Traceability Hackathon 2025.
 
 ## Features
 
 ### Consumer Features
 - **QR Code Scanning**: Instantly scan seafood products to view complete traceability
-- **FishScore Rating**: AI-powered score (0-100) based on multiple factors
+- **Ocean Trace Rating**: AI-powered score (0-100) based on multiple factors
 - **Detailed Breakdown**: View freshness, sustainability, health, and price value scores
 - **Supply Chain Journey**: Complete timeline from catch to retail
 - **Temperature Monitoring**: Real-time cold chain compliance tracking
@@ -29,9 +29,9 @@ FishScore is an intelligent traceability platform that tracks seafood from ocean
 - **TypeScript**: Full type safety
 - **Deployment**: Vercel
 
-## FishScore Algorithm
+## Ocean Trace Algorithm
 
-The FishScore is calculated using four key components:
+The Ocean Trace is calculated using four key components:
 
 1. **Freshness (35%)**: Based on catch date, temperature history, and cold chain compliance
 2. **Sustainability (30%)**: Fishing method, certifications (MSC), quota compliance, carbon footprint
@@ -98,7 +98,7 @@ Visit `http://localhost:3000` to see the app.
 │   └── about/             # About page
 ├── components/            # React components
 │   ├── ui/               # shadcn/ui components
-│   ├── score-badge.tsx   # FishScore display
+│   ├── score-badge.tsx   # Ocean Trace display
 │   ├── score-breakdown.tsx
 │   ├── supply-chain-timeline.tsx
 │   └── temperature-chart.tsx

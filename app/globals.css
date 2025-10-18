@@ -223,6 +223,7 @@ body {
   font-family: var(--font-sans);
   background: var(--color-background);
   color: var(--color-foreground);
+  overflow-x: hidden;
 }
 
 /* Custom gradient backgrounds */
@@ -252,5 +253,15 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
   }
 }

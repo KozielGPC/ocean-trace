@@ -1,6 +1,6 @@
-import type { Product, FishScore } from "./types"
+import type { Product, OceanTraceScore } from "./types"
 
-export function calculateFishScore(product: Product): FishScore {
+export function calculateOceanTraceScore(product: Product): OceanTraceScore {
   const freshness = calculateFreshness(product)
   const sustainability = calculateSustainability(product)
   const health = calculateHealth(product)

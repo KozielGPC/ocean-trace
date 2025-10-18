@@ -19,8 +19,8 @@ export default function DashboardPage() {
       trend: "+12.5%",
     },
     {
-      title: "Avg FishScore",
-      value: analytics.avgFishScore,
+      title: "Avg Ocean Trace",
+      value: analytics.avgOcean Trace,
       icon: TrendingUp,
       description: "Across all products",
       trend: "+3.2 points",
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                     <span className="text-xs font-bold text-primary">2</span>
                   </div>
                   <div>
-                    <p className="font-medium">Promote FishScore in-store</p>
+                    <p className="font-medium">Promote Ocean Trace in-store</p>
                     <p className="text-sm text-muted-foreground">Add QR codes to more product displays</p>
                   </div>
                 </li>
@@ -164,7 +164,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <p className="font-medium">Optimize pricing for Atlantic Cod</p>
-                    <p className="text-sm text-muted-foreground">Lower FishScore suggests price adjustment needed</p>
+                    <p className="text-sm text-muted-foreground">Lower Ocean Trace suggests price adjustment needed</p>
                   </div>
                 </li>
               </ul>

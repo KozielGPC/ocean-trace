@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <Waves className="h-12 w-12" />
-            <h1 className="text-5xl font-bold">FishScore</h1>
+            <h1 className="text-5xl font-bold">Ocean Trace</h1>
           </div>
           <p className="text-xl text-ocean-100 mb-8 max-w-2xl mx-auto leading-relaxed">
             AI-powered seafood traceability from ocean to plate. Scan any seafood product to discover its freshness,
@@ -87,7 +87,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-4">Try It Now</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
-            Click on any product to see its complete FishScore analysis
+            Click on any product to see its complete Ocean Trace analysis
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -151,7 +151,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bg-card border-t border-border py-8 px-4">
         <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
-          <p className="mb-2">FishScore - Ocean Traceability Hackathon 2025</p>
+          <p className="mb-2">Ocean Trace - Ocean Traceability Hackathon 2025</p>
           <p>From Sea to Dish - Intelligent Traceability for a Sustainable Ocean</p>
         </div>
       </footer>

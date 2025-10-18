@@ -1,4 +1,5 @@
 import type { Product, Scan, RetailerAnalytics } from "./types"
+import { createBlockchainRecordsFromProduct } from "./blockchain"
 
 export const mockProducts: Product[] = [
   {
@@ -45,6 +46,8 @@ export const mockProducts: Product[] = [
       },
     ],
     carbonFootprint: 2.3,
+    blockchainHashes: [],
+    isBlockchainVerified: false,
   },
   {
     id: "prod-002",
@@ -90,6 +93,8 @@ export const mockProducts: Product[] = [
       },
     ],
     carbonFootprint: 4.8,
+    blockchainHashes: [],
+    isBlockchainVerified: false,
   },
   {
     id: "prod-003",
@@ -135,6 +140,8 @@ export const mockProducts: Product[] = [
       },
     ],
     carbonFootprint: 3.1,
+    blockchainHashes: [],
+    isBlockchainVerified: false,
   },
   {
     id: "prod-004",
@@ -180,6 +187,8 @@ export const mockProducts: Product[] = [
       },
     ],
     carbonFootprint: 5.2,
+    blockchainHashes: [],
+    isBlockchainVerified: false,
   },
   {
     id: "prod-005",
@@ -225,8 +234,16 @@ export const mockProducts: Product[] = [
       },
     ],
     carbonFootprint: 1.8,
+    blockchainHashes: [],
+    isBlockchainVerified: false,
   },
 ]
+
+// Generate blockchain records for all products
+mockProducts.forEach(product => {
+  product.blockchainHashes = createBlockchainRecordsFromProduct(product)
+  product.isBlockchainVerified = true
+})
 
 // Generate mock scans for analytics
 export const mockScans: Scan[] = []
@@ -262,7 +279,7 @@ export const mockRetailerAnalytics: RetailerAnalytics = {
     fair: 15,
     poor: 5,
   },
-  avgFishScore: 84,
+  avgOceanTraceScore: 84,
   wasteReduction: 23,
   revenueImpact: 45600,
 }

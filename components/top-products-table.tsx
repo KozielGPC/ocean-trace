@@ -23,7 +23,7 @@ export function TopProductsTable({ products }: TopProductsTableProps) {
     <Card>
       <CardHeader>
         <CardTitle>Top Products</CardTitle>
-        <CardDescription>Most scanned products and their average FishScores</CardDescription>
+        <CardDescription>Most scanned products and their average Ocean Traces</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>

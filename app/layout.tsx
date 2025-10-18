@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "FishScore - AI-Powered Seafood Traceability",
+  title: "Ocean Trace - AI-Powered Seafood Traceability",
   description:
     "Scan seafood products to discover freshness, sustainability, and health impact. From ocean to plate, transparency you can trust.",
     generator: 'v0.app'
